@@ -1,0 +1,162 @@
+brainstroming:
+
+my prompt :
+ACT AS: A senior backend engineer and data engineer with strong experience in financial systems, reconciliation engines, and data pipelines.
+TASK:
+Build a complete transaction reconciliation system that compares two datasets:
+1) Internal system transactions (recorded instantly)
+2) Bank settlement transactions (recorded with 1–2 day delay)
+The goal is to identify mismatches and explain why books don’t balance at month end.
+REQUIREMENTS:
+1. DATA GENERATION:
+- Generate realistic synthetic datasets (CSV format) for both:
+  a) system_transactions.csv
+  b) bank_transactions.csv
+- Each dataset should include:
+  - transaction_id
+  - user_id
+  - amount
+  - transaction_type (payment/refund)
+  - timestamp
+- Introduce real-world inconsistencies:
+  - Settlement delay (bank records appear 1–2 days later)
+  - Missing transactions in bank dataset
+  - Missing transactions in system dataset
+  - Duplicate entries in one dataset
+  - Refund without original transaction
+  - Amount mismatch due to rounding or fees
+2. RECONCILIATION LOGIC:
+- Write code (Python preferred, using pandas) to:
+  - Load both datasets
+  - Match transactions using:
+    transaction_id + amount + date tolerance (±2 days)
+  - Classify records into:
+    - Matched
+    - Missing in bank
+    - Missing in system
+    - Duplicate
+    - Amount mismatch
+3. OUTPUT:
+- Generate a clear reconciliation report:
+  - Total transactions in each dataset
+  - Count of matched transactions
+  - Count of each mismatch category
+- Print sample mismatched records for each category
+- Save output as:
+  - reconciliation_report.txt
+  - mismatches.csv
+4. EDGE CASE HANDLING:
+- Ensure system handles:
+  - Duplicate transaction_ids
+  - Null or missing values
+  - Timezone differences (assume UTC vs local)
+  - Floating point rounding issues
+5. CODE QUALITY:
+- Modular functions:
+  - generate_data()
+  - reconcile_transactions()
+  - generate_report()
+- Clean, readable, production-like structure
+- Add comments explaining logic
+6. TESTING:
+- Include test cases validating:
+  - Matching logic
+  - Detection of duplicates
+  - Handling of missing entries
+7. EXPLANATION:
+- Briefly explain:
+  - Why mismatches happen in real systems
+  - How delays and inconsistencies affect reconciliation
+OUTPUT FORMAT:
+- Provide full working Python code
+- Provide sample generated datasets
+- Provide example output report
+- Keep everything runnable end-to-end
+CONSTRAINT:
+- Keep it simple but realistic (do not over-engineer)
+- Focus on clarity and real-world correctness
+
+claude o/p:
+reconcile.py
+
+
+2. Distilled Promppt:
+ACT AS: A senior backend engineer and data engineer with strong experience in financial systems, reconciliation engines, and data pipelines.
+TASK:
+Build a complete transaction reconciliation system that compares two datasets:
+1) Internal system transactions (recorded instantly)
+2) Bank settlement transactions (recorded with 1–2 day delay)
+The goal is to identify mismatches and explain why books don’t balance at month end.
+REQUIREMENTS:
+1. DATA GENERATION:
+- Generate realistic synthetic datasets (CSV format) for both:
+  a) system_transactions.csv
+  b) bank_transactions.csv
+- Each dataset should include:
+  - transaction_id
+  - user_id
+  - amount
+  - transaction_type (payment/refund)
+  - timestamp
+- Introduce real-world inconsistencies:
+  - Settlement delay (bank records appear 1–2 days later)
+  - Missing transactions in bank dataset
+  - Missing transactions in system dataset
+  - Duplicate entries in one dataset
+  - Refund without original transaction
+  - Amount mismatch due to rounding or fees
+2. RECONCILIATION LOGIC:
+- Write code (Python preferred, using pandas) to:
+  - Load both datasets
+  - Match transactions using:
+    transaction_id + amount + date tolerance (±2 days)
+  - Classify records into:
+    - Matched
+    - Missing in bank
+    - Missing in system
+    - Duplicate
+    - Amount mismatch
+3. OUTPUT:
+- Generate a clear reconciliation report:
+  - Total transactions in each dataset
+  - Count of matched transactions
+  - Count of each mismatch category
+- Print sample mismatched records for each category
+- Save output as:
+  - reconciliation_report.txt
+  - mismatches.csv
+4. EDGE CASE HANDLING:
+- Ensure system handles:
+  - Duplicate transaction_ids
+  - Null or missing values
+  - Timezone differences (assume UTC vs local)
+  - Floating point rounding issues
+5. CODE QUALITY:
+- Modular functions:
+  - generate_data()
+  - reconcile_transactions()
+  - generate_report()
+- Clean, readable, production-like structure
+- Add comments explaining logic
+6. TESTING:
+- Include test cases validating:
+  - Matching logic
+  - Detection of duplicates
+  - Handling of missing entries
+7. EXPLANATION:
+- Briefly explain:
+  - Why mismatches happen in real systems
+  - How delays and inconsistencies affect reconciliation
+OUTPUT FORMAT:
+- Provide full working Python code
+- Provide sample generated datasets
+- Provide example output report
+- Keep everything runnable end-to-end
+CONSTRAINT:
+- Keep it simple but realistic (do not over-engineer)
+- Focus on clarity and real-world correctness
+
+Test Cases:
+
+ Tests are already inside reconcile.py in the run_tests() function
+ all 9 tests passed 

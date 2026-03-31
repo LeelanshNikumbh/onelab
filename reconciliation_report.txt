@@ -1,0 +1,82 @@
+=================================================================
+       TRANSACTION RECONCILIATION REPORT
+       Generated: 2026-03-31 13:04:46
+=================================================================
+
+[ DATASET SUMMARY ]
+----------------------------------------
+  System transactions  : 30
+  Bank transactions    : 31
+  (incl. duplicates)   
+
+[ RECONCILIATION RESULTS ]
+----------------------------------------
+  Matched              : 25
+  Missing in bank      : 3
+  Missing in system    : 1
+  Duplicates (bank)    : 4
+  Amount mismatch      : 2
+  Refund / no original : 1
+
+  [!] Total mismatches  : 11
+
+─────────────────────────────────────────────────────────────────
+  [ MISSING IN BANK ]
+─────────────────────────────────────────────────────────────────
+  transaction_id: TXN0003 | amount: 232.71 | transaction_type: payment | timestamp: 2026-03-14 01:01:00
+  transaction_id: TXN0011 | amount: 503.94 | transaction_type: payment | timestamp: 2026-03-10 02:54:00
+  transaction_id: TXN0022 | amount: 1594.55 | transaction_type: payment | timestamp: 2026-03-05 20:10:00
+
+─────────────────────────────────────────────────────────────────
+  [ MISSING IN SYSTEM ]
+─────────────────────────────────────────────────────────────────
+  transaction_id: TXN9001 | amount: 350.0 | transaction_type: payment | timestamp: 2026-03-14 10:30:00
+
+─────────────────────────────────────────────────────────────────
+  [ DUPLICATES IN BANK ]
+─────────────────────────────────────────────────────────────────
+  transaction_id: TXN0005 | amount: 592.47 | timestamp: 2026-03-09 14:37:00
+  transaction_id: TXN0018 | amount: 1023.5 | timestamp: 2026-03-13 06:41:00
+  transaction_id: TXN0005 | amount: 592.47 | timestamp: 2026-03-09 14:37:00
+  transaction_id: TXN0018 | amount: 1023.5 | timestamp: 2026-03-13 06:41:00
+
+─────────────────────────────────────────────────────────────────
+  [ AMOUNT MISMATCH ]
+─────────────────────────────────────────────────────────────────
+  transaction_id: TXN0015 | system_amount: 1136.05 | bank_amount: 1135.58 | difference: 0.47
+  transaction_id: TXN0007 | system_amount: 230.85 | bank_amount: 230.44 | difference: 0.41
+
+─────────────────────────────────────────────────────────────────
+  [ REFUND WITHOUT ORIGINAL ]
+─────────────────────────────────────────────────────────────────
+  transaction_id: TXN9002 | amount: 120.0 | transaction_type: refund | timestamp: 2026-03-20 09:00:00
+
+=================================================================
+  WHY DO MISMATCHES HAPPEN IN REAL SYSTEMS?
+=================================================================
+
+  1. SETTLEMENT DELAY
+     Payment platforms record a transaction the moment the
+     customer pays. Banks batch-process and settle funds
+     1–2 days later. At month end, March 31 payments may
+     only appear in the bank in April — creating a gap.
+
+  2. ROUNDING & FEES
+     Banks sometimes deduct processing fees (0.1–2%) before
+     settling. The internal system records the gross amount,
+     the bank records the net → small but real mismatch.
+
+  3. DUPLICATES
+     Network retries, system crashes, or double-posting by
+     the bank's clearing house can result in the same
+     transaction appearing twice in one dataset.
+
+  4. MISSING TRANSACTIONS
+     Transactions can fail mid-flight — the system recorded
+     it, the bank never received it (or vice versa). Also
+     caused by timezone cutoffs and batch processing windows.
+
+  5. REFUNDS WITHOUT ORIGINALS
+     A refund may be processed by a different system or team
+     without properly linking it to the original payment,
+     leaving an orphan record on one side.

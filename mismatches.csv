@@ -1,0 +1,12 @@
+user_id,amount,transaction_type,timestamp,transaction_id,issue,source,category,system_amount,bank_amount,difference
+USR177,232.71,payment,2026-03-14 01:01:00,TXN0003,Missing in bank,system,missing_in_bank,,,
+USR135,503.94,payment,2026-03-10 02:54:00,TXN0011,Missing in bank,system,missing_in_bank,,,
+USR108,1594.55,payment,2026-03-05 20:10:00,TXN0022,Missing in bank,system,missing_in_bank,,,
+USR199,350.0,payment,2026-03-14 10:30:00,TXN9001,Missing in system,bank,missing_in_system,,,
+USR197,592.47,refund,2026-03-09 14:37:00,TXN0005,Duplicate in bank dataset,bank,duplicates,,,
+USR182,1023.5,refund,2026-03-13 06:41:00,TXN0018,Duplicate in bank dataset,bank,duplicates,,,
+USR197,592.47,refund,2026-03-09 14:37:00,TXN0005,Duplicate in bank dataset,bank,duplicates,,,
+USR182,1023.5,refund,2026-03-13 06:41:00,TXN0018,Duplicate in bank dataset,bank,duplicates,,,
+,,,,TXN0015,Amount mismatch (Δ 0.47),both,amount_mismatch,1136.05,1135.58,0.47
+,,,,TXN0007,Amount mismatch (Δ 0.41),both,amount_mismatch,230.85,230.44,0.41
+USR145,120.0,refund,2026-03-20 09:00:00,TXN9002,Refund with no original transaction,,refund_no_original,,,
